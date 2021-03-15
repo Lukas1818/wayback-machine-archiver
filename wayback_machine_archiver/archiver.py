@@ -168,6 +168,12 @@ def main():
         default=5,
         type=int,
     )
+    parser.add_argument(
+        "--simulate",
+        help="simulate archiving only by printing the URLs",
+        default=False,
+        action="store_true",
+    )
 
     args = parser.parse_args()
 
@@ -234,6 +240,11 @@ def main():
 
     # Deduplicate URLs
     archive_urls = set(archive_urls)
+
+    # Simulate archiving
+    if args.simulate:
+        print("Archive URLs:", str(archive_urls))
+        return
 
     # Archive the URLs
     logging.debug("Archive URLs: %s", archive_urls)
